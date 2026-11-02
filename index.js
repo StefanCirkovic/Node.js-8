@@ -5,8 +5,9 @@ const { handleApiCall } = require('./src/handlers/apiHandler');
 const { handlePage} = require('./src/handlers/pageHandler');
 
 
-const server = http.createServer((req, res) => {
+require('./src/listeners/pageListener')
 
+const server = http.createServer((req, res) => {
 
 
     if (req.url.startsWith('/public/')) {

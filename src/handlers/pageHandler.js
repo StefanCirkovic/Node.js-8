@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
-
+const emitter = require("../events/emitter");
 
 
 function handlePage(req, res) {
@@ -12,9 +12,11 @@ function handlePage(req, res) {
 
         if (err) {
             res.writeHead(500, {"Content-Type": "text/plain"});
+            emitter.emit("page:fail");
             return res.end("Error loading file");
         }
 
+        emitter.emit("page:success");
         res.writeHead(200, {"Content-Type": 'text/html'});
         return res.end(data);
 
